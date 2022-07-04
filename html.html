@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock-Paper-Scissors</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="intro">
+    <div class="header">
+        <div class="header-logo">LongProduction Games</div>
+        <div class="header-link">
+            <ul>
+                <li><a href="index.html">Rock-Paper Scissors</a></li>
+                <li><a href="index.html">Tic-Tac-Toe</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="introContainer" class="flex">
         <div>DO YOU WANT TO PLAY A GAME OF ROCK, PAPER, SCISSORS?</div>
         <div>
             <button id="yes">YES</button>
@@ -17,20 +27,26 @@
     <div id="noMessage">
         <p>AWWW, MAYBE NEXT TIME!</p>
     </div>
-    <div id="score">PLAYER SCORE: 0 | COMPUTER SCORE: 0 | TIE: 0</div>
+    <div id="score" class="text-center">PLAYER SCORE: 0 | COMPUTER SCORE: 0 | TIE: 0</div>
     <div id="gameContainer">
-        <div>WHAT'S YOUR MOVE?</div>
-        <div>
+        <div class="text-center">WHAT IS YOUR MOVE?</div>
+        <div class="text-center">
             <button id="rock">ROCK</button>
             <button id="scissors">SCISSORS</button>
             <button id="paper">PAPER</button>
         </div>
-        <div id="results">test</div>
     </div>
-    <div id="playAgain">
-        <div>DO YOU WANT TO PLAY AGAIN?</div>
-        <button id="yesAgain">YES</button>
-        <button id="noAgain">NO</button>
+    <div id="results" class="text-center">SOMETHING WENT WRONG</div>
+    <div id="playAgainContainer">
+        <div class="text-center">DO YOU WANT TO PLAY AGAIN?</div>
+        <div class="text-center">
+            <button id="yesAgain">YES</button>
+            <button id="noAgain">NO</button>
+        </div>
+    </div>
+    <div id="noAgainMessage" class="text-center">THANKS FOR PLAYING!</div>
+    <div class="footer">
+        <div><p class="no-margin">LongProduction @ 2022</p></div>
     </div>
     <script src="app.js"></script>
 </body>

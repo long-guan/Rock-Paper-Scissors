@@ -10,42 +10,52 @@ gameContainer.style.display = "none";
 const score = document.querySelector('#score');
 score.style.display = "none";
 
-const playAgain = document.querySelector('#playAgain');
-playAgain.style.display = "none";
+const playAgainContainer = document.querySelector('#playAgainContainer');
+playAgainContainer.style.display = "none";
 
 const results = document.querySelector('#results');
 results.style.display = "none";
-
-const intro = document.querySelector('#intro');
-const yesBtn = document.querySelector('#yes');
-yesBtn.addEventListener('click', function() {
-    hideOrShow(gameContainer);
-    hideOrShow(intro);
-    hideOrShow(score);
-});
-
-// toggles on or off the display of an element
-function hideOrShow(element) {
-    if (element.style.display === "none") {
-        element.style.display = "block";
-    } else {
-        element.style.display = "none";
-    }
-}
-
-// user clicks no ==> print message "AWWWW, MAYBE NEXT TIME :)"
-const noMessage = document.querySelector('#noMessage');
-noMessage.style.display = "none";
-const noBtn = document.querySelector('#no');
-noBtn.addEventListener('click', function() {
-    hideOrShow(noMessage);
-    hideOrShow(intro);
-});
 
 const rock = document.querySelector('#rock');
 const scissors = document.querySelector('#scissors');
 const paper = document.querySelector('#paper');
 
+const yesAgainBtn = document.querySelector('#yesAgain');
+yesAgainBtn.addEventListener('click', function() {
+    hideOrShow(playAgainContainer);
+    hideOrShow(results);
+    hideOrShow(gameContainer);
+})
+
+const introContainer = document.querySelector('#introContainer');
+const yesBtn = document.querySelector('#yes');
+yesBtn.addEventListener('click', function() {
+    hideOrShow(gameContainer);
+    hideOrShow(introContainer);
+    hideOrShow(score);
+});
+
+const noAgainMessage = document.querySelector('#noAgainMessage');
+noAgainMessage.style.display = 'none';
+
+// user clicks no ==> print message "AWWWW, MAYBE NEXT TIME :)"
+const noMessage = document.querySelector('#noMessage');
+noMessage.style.display = "none";
+
+const noBtn = document.querySelector('#no');
+noBtn.addEventListener('click', function() {
+    hideOrShow(noMessage);
+    hideOrShow(introContainer);
+});
+
+const noAgainBtn = document.querySelector('#noAgain');
+noAgainBtn.addEventListener('click', function() {
+    hideOrShow(noAgainMessage);
+    hideOrShow(playAgainContainer);
+    hideOrShow(results);
+})
+
+// button options for player
 rock.addEventListener('click', function() {
     let playerSelection = this.id;
     playRound(playerSelection, computerSelection());
@@ -59,6 +69,14 @@ paper.addEventListener('click', function() {
     playRound(playerSelection, computerSelection());
 });
 
+// toggles on or off the display of an element
+function hideOrShow(element) {
+    if (element.style.display === "none") {
+        element.style.display = "block";
+    } else {
+        element.style.display = "none";
+    }
+}
 
 // Randomly generates num of 0, 1, or 2. 33% chance generator
 function randNum() {
@@ -84,14 +102,13 @@ function computerSelection() {
     }
 }
 
+
 function updateScore() {
     score.innerText = `PLAYER SCORE:${playerScore} | COMPUTER SCORE:${computerScore} | TIE:${tie}`;
     hideOrShow(results);
     hideOrShow(gameContainer);
-    hideOrShow(playAgain);
+    hideOrShow(playAgainContainer);
 }
-
-
 
 function playerWinProcedure() {
     playerScore += 1;
@@ -107,25 +124,32 @@ function computerWinProcedure() {
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == 'rock' && computerSelection == 'scissors') {
         console.log('YOU WIN! ROCK BEATS SCISSORS');
+        results.innerText = 'YOU WIN! ROCK BEATS SCISSORS';
         playerWinProcedure();
     } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
         console.log('YOU WIN! SCISSORS BEATS PAPER');
+        results.innerText = 'YOU WIN! SCISSORS BEATS PAPER';
         playerWinProcedure();
     } else if (playerSelection == 'paper' && computerSelection == 'rock') {
         console.log('YOU WIN! PAPER BEATS ROCK');
+        results.innerText = 'YOU WIN! PAPER BEATS ROCK';
         playerWinProcedure();
     } else if (playerSelection == computerSelection) {
         console.log("IT'S A TIE");
+        results.innerText = "IT'S A TIE";
         tie += 1;
         updateScore();
     } else if (playerSelection == 'rock' && computerSelection == 'paper') {
         console.log('YOU LOSE! PAPER BEATS ROCK');
+        results.innerText = 'YOU LOSE! PAPER BEATS ROCK';
         computerWinProcedure();
     } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
         console.log('YOU LOSE! SCISSORS BEATS PAPER');
+        results.innerText = 'YOU LOSE! SCISSORS BEATS PAPER';
         computerWinProcedure();
     } else if (playerSelection == 'scissors' && computerSelection == 'rock') {
         console.log('YOU LOSE! ROCK BEATS SCISSORS');
+        results.innerText = 'YOU LOSE! ROCK BEATS SCISSORS';
         computerWinProcedure();
     } else {
         console.log(playerSelection);
@@ -151,21 +175,4 @@ function resetScore() {
     playerScore = 0;
     computerScore = 0;
     tie = 0;
-}
-
-function game(numOfGame) {
-    loopGame(numOfGame); // loops the game depending on numOfGame
-    declareWin(); // prints out the winner
-    resetScore(); // resets the score
-}
-
-// prints the result depending on the score
-function declareWin() {
-    if (playerScore > computerScore) {
-        console.log('GAME OVER, YOU WIN!');
-    } else if (computerScore > playerScore) {
-        console.log('GAME OVER, YOU LOSE!');
-    } else {
-        console.log("GAME OVER, IT'S A TIE!")
-    }
 }
